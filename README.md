@@ -63,4 +63,18 @@ bosh>send "select Customer.id , Product.id from sales limit 10 offset 99990" to 
 0
 4
 0
+bosh>select * from label
+0
+3
+3
+4
+0
+4
+0
+0
+4
+0
+=============
+total row : 10
+
 ```
