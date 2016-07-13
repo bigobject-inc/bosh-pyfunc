@@ -15,7 +15,7 @@ getKmeanCent.py: receive k mean clustering centroids result
 getKmeanLabel.py: use the centroids to tag a label
 
 ex. use BigObject sample data (100k rows)
-1. use the first 99990 rows (Customer.id, Product.id) as data to compute k-mean (k=5)
+1.use the first 99990 rows (Customer.id, Product.id) as data to compute k-mean (k=5)
 ```
 bosh>send "select Customer.id , Product.id from sales limit 99990" to "./kmean.py 5"
 (99990, 2)
@@ -48,7 +48,7 @@ bosh>select * from cent
 total row : 5
 ```
 
-3. use the centroids result to label the last 10 rows
+3.use the centroids result to label the last 10 rows
 
 ```
 bosh>create table label(label INT32)
