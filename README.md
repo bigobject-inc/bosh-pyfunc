@@ -2,11 +2,13 @@
 python functions for BigObject python bosh
 
 requirement: bosh 0.2.18+ , numpy, scipy
+```
 sudo pip install --upgrade pip
 sudo pip install numpy
 sudo pip install scipy
 sudo pip install bosh
 chmod +x *.py
+```
 
 ## Kmean : kmean.py , getKmeanCent.py , getKmeanLabel.py
 
