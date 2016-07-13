@@ -13,7 +13,9 @@ chmod +x *.py
 ## Kmean : kmean.py , getKmeanCent.py , getKmeanLabel.py
 
 kmean.py: compute k mean clustering
+
 getKmeanCent.py: receive k mean clustering centroids result 
+
 getKmeanLabel.py: use the centroids to tag a label
 
 ex. use BigObject sample data (100k rows)
@@ -28,8 +30,6 @@ bosh>send "select Customer.id , Product.id from sales limit 99990" to "./kmean.p
  [ 1759.97057683  3352.3180584 ]]
 ```
 2.receive the k-mean centroids result 
-create table cent(col1 FLOAT, col2 FLOAT)
-receive cent from "./getKmeanCent.py"
 ```
 bosh>create table cent(col1 FLOAT, col2 FLOAT)
 bosh>receive cent from "./getKmeanCent.py"
