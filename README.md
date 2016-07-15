@@ -65,7 +65,7 @@ total row : 10
 
 ```
 
-## Load images : loadImagePath.py , imgstr2file.py
+## Load images : loadImagePath.py , imgstr2file.py (use base64 coding)
 
 loadImagePath.py : load images in a diretory into a BigObject table
 
