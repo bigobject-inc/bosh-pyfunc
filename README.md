@@ -14,9 +14,9 @@ chmod +x *.py
 
 **kmean.py**: compute k mean clustering
 
-getKmeanCent.py: receive k mean clustering centroids result 
+**getKmeanCent.py**: receive k mean clustering centroids result 
 
-getKmeanLabel.py: use the centroids to tag a label
+**getKmeanLabel.py**: use the centroids to tag a label
 
 ex. use BigObject sample data (100k rows)
 
@@ -67,7 +67,7 @@ total row : 10
 
 ## Load images : loadImagePath.py , imgstr2file.py (use base64 coding)
 
-loadImagePath.py : load images in a diretory into a BigObject table
+**loadImagePath.py**: load images in a diretory into a BigObject table
 
 ex. load ./pic/* into the image_table. 
 
@@ -81,7 +81,7 @@ Screenshot.png
 Screenshot-2.png
 ```
 
-imgstr2file.py : write a image string in BigObject table into a file
+**imgstr2file.py**: write a image string in BigObject table into a file
 
 ex. write the image content (Screenshot-2.png) to the file "test.png"
 ```
