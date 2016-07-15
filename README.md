@@ -12,7 +12,7 @@ chmod +x *.py
 
 ## Kmean : kmean.py , getKmeanCent.py , getKmeanLabel.py
 
-kmean.py: compute k mean clustering
+#### kmean.py ####: compute k mean clustering
 
 getKmeanCent.py: receive k mean clustering centroids result 
 
