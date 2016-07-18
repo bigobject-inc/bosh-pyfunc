@@ -72,9 +72,9 @@ ex. load ./pic/* into the image_table.
 
 Note: since the VARSTRING max length is limited, you can only load small images into a column
 ```
-bosh>CREATE TABLE images_table ('filename' STRING(63), 'content' VARSTRING(32766))
-bosh>receive images_table from "./loadImagePath ./pic"
-bosh>select filename from images_table
+bosh>CREATE TABLE images ('filename' STRING(63), 'content' VARSTRING(32766))
+bosh>receive images from "./loadImagePath ./pic"
+bosh>select filename from images
 Screenshot-1.png
 Screenshot.png
 Screenshot-2.png
@@ -84,5 +84,5 @@ Screenshot-2.png
 
 ex. write the image content (cat.jpg) to the file "tmp.jpg"
 ```
-bosh>send "select content from images_table where filename='cat.jpg'" to "./imgstr2file tmp.jpg"
+bosh>send "select content from images where filename='cat.jpg'" to "./imgstr2file tmp.jpg"
 ```
