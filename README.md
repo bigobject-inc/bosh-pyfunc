@@ -64,20 +64,33 @@ total row : 10
 
 ```
 
-## Load images : loadImagePath , imgstr2file (use base64 coding)
+## Load images : loadImage, loadImagePath, imgstr2file (use base64 coding)
+
+**loadImage**: load an image into a BigObject table
+
+ex. load pic/tree.jpg into the "image" table. 
+
+Note: since the VARSTRING max length is limited, you can only load small images into a column
+
+```
+bosh>CREATE TABLE images ('filename' STRING(63), 'content' VARSTRING(32766))
+bosh>receive images from "./loadImage pic/tree.jpg"
+```
 
 **loadImagePath**: load images in a diretory into a BigObject table
 
-ex. load ./pic/* into the image_table. 
+ex. load pic/* into the "image" table. 
 
-Note: since the VARSTRING max length is limited, you can only load small images into a column
 ```
-bosh>CREATE TABLE images ('filename' STRING(63), 'content' VARSTRING(32766))
-bosh>receive images from "./loadImagePath ./pic"
+bosh>receive images from "./loadImagePath pic"
 bosh>select filename from images
-Screenshot-1.png
-Screenshot.png
-Screenshot-2.png
+tree.jpg
+notebook.jpg
+dog.jpg
+cat.jpg
+rabbit.jpg
+=============
+total row : 5
 ```
 
 **imgstr2file**: write a image string in BigObject table into a file
@@ -85,4 +98,24 @@ Screenshot-2.png
 ex. write the image content (cat.jpg) to the file "tmp.jpg"
 ```
 bosh>send "select content from images where filename='cat.jpg'" to "./imgstr2file tmp.jpg"
+```
+
+##Tensorflow image recognition demo : tf_image
+
+use pip to install tensorflow (Ubuntu/Linux 64-bit, CPU only, Python 2.7)
+```
+sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.9.0-cp27-none-linux_x86_64.whl 
+```
+Please refer https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html#pip-installation for detail
+
+**tf_image** : read the image stored in BigObject table and then run tensorflow image recognition
+
+```
+send "select content from images where filename='cat.jpg'" to "./tf_image
+W tensorflow/core/framework/op_def_util.cc:332] Op BatchNormWithGlobalNormalization is deprecated. It will cease to work in GraphDef version 9. Use tf.nn.batch_normalization().
+tiger cat (score = 0.54326)
+tabby, tabby cat (score = 0.27918)
+Egyptian cat (score = 0.10635)
+lynx, catamount (score = 0.01014)
+tiger, Panthera tigris (score = 0.00103)
 ```
