@@ -112,7 +112,7 @@ Please refer https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html#
 **tf_image** : read the image stored in BigObject table and then run tensorflow image recognition
 
 ```
-send "select content from images where filename='cat.jpg'" to "./tf_image"
+bosh>send "select content from images where filename='cat.jpg'" to "./tf_image"
 W tensorflow/core/framework/op_def_util.cc:332] Op BatchNormWithGlobalNormalization is deprecated. It will cease to work in GraphDef version 9. Use tf.nn.batch_normalization().
 tiger cat (score = 0.54326)
 tabby, tabby cat (score = 0.27918)
