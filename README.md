@@ -84,6 +84,7 @@ ex. load pic/* into the "image" table.
 ```
 bosh>receive images from "./loadImagePath pic"
 bosh>select filename from images
+pic/tree.jpg
 tree.jpg
 notebook.jpg
 dog.jpg
