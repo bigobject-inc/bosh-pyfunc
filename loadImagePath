@@ -1,0 +1,21 @@
+#!/usr/bin/python
+import base64	
+import sys
+import loadImage
+from os import listdir
+from os.path import isfile, join
+
+def list_file(path):
+	onlyfiles = [f for f in listdir(path) if isfile(join(path, f))]
+	return onlyfiles
+
+
+def load_image_path(path):
+	file_list = list_file(path)
+	for f_i in file_list:
+		print f_i + " " + loadImage.image2base64(path + "/" + f_i)
+
+if __name__ == "__main__":
+	pic_path = sys.argv[1]
+	load_image_path(pic_path)
+

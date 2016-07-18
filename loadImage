@@ -1,0 +1,15 @@
+#!/usr/bin/python
+import base64	
+import sys
+
+def image2base64(filename):
+	with open(filename, "rb") as imageFile:
+		str = base64.b64encode(imageFile.read())
+		return str
+
+if __name__ == "__main__":
+	pic_file = sys.argv[1]
+	pic_data = image2base64(pic_file)
+	print pic_data
+	
+
