@@ -5,7 +5,7 @@ import re
 
 def get_kmean_centroid(tmp_file_name='./centroids.txt'):
 	a = np.loadtxt(tmp_file_name, dtype=np.float)
-	res_str = "\n".join([" ".join([str(wtf) for wtf in p]) for p in a])
+	res_str = "\n".join([",".join([str(wtf) for wtf in p]) for p in a])
 	print res_str
 
 if __name__ == "__main__":
