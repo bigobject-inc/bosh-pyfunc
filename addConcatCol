@@ -1,0 +1,17 @@
+#!/usr/bin/python
+import sys
+
+def add_a_concat_col(ind_1, ind_2):
+	for line in sys.stdin:
+		concat=line.split(',')[ind_1] + '_' + line.split(',')[ind_2]
+		print line[:-1] + "," + concat
+
+
+if __name__ == "__main__":
+	if len(sys.argv) > 2:
+		ccol1 = sys.argv[1]
+		ccol2 = sys.argv[2]
+		
+		add_a_concat_col(int(ccol1) , int(ccol2))
+	else:
+		print "addConcatCol <col 1> <col 2>"
