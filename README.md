@@ -29,7 +29,7 @@ ex. use BigObject sample data (100k rows)
 
 1.use the first 99990 rows (Customer.id, Product.id) as data to compute k-mean (k=5)
 ```
-bosh>send "select Customer.id , Product.id from sales limit 99990" to "./kmean 5"
+bosh>send "select Customer.id , Product.id from sales limit 99990" to "kmean 5"
 (99990, 2)
 [[ 1855.87585289  1062.72896211]
  [ 8251.09389935  3361.39229688]
@@ -40,7 +40,7 @@ bosh>send "select Customer.id , Product.id from sales limit 99990" to "./kmean 5
 2.receive the k-mean centroids result 
 ```
 bosh>create table cent(col1 FLOAT, col2 FLOAT)
-bosh>receive cent from "./getKmeanCent"
+bosh>receive cent from "getKmeanCent"
 bosh>select * from cent
 1855.88,1062.73
 8251.09,3361.39
@@ -55,7 +55,7 @@ total row : 5
 
 ```
 bosh>create table label(label INT32)
-bosh>send "select Customer.id , Product.id from sales limit 10 offset 99990" to "./getKmeanLabel" return to label
+bosh>send "select Customer.id , Product.id from sales limit 10 offset 99990" to "getKmeanLabel" return to label
 bosh>select * from label
 0
 3
@@ -82,7 +82,7 @@ Note: since the VARSTRING max length is limited, you can only load small images 
 
 ```
 bosh>CREATE TABLE images ('filename' STRING(63), 'content' VARSTRING(32766))
-bosh>receive images from "./loadImage pic/tree.jpg"
+bosh>receive images from "loadImage pic/tree.jpg"
 ```
 
 **loadImagePath**: load images in a diretory into a BigObject table
@@ -90,7 +90,7 @@ bosh>receive images from "./loadImage pic/tree.jpg"
 ex. load pic/* into the "image" table. 
 
 ```
-bosh>receive images from "./loadImagePath pic"
+bosh>receive images from "loadImagePath pic"
 bosh>select filename from images
 pic/tree.jpg
 tree.jpg
@@ -106,7 +106,7 @@ total row : 5
 
 ex. write the image content (cat.jpg) to the file "tmp.jpg"
 ```
-bosh>send "select content from images where filename='cat.jpg'" to "./imgstr2file tmp.jpg"
+bosh>send "select content from images where filename='cat.jpg'" to "imgstr2file tmp.jpg"
 ```
 
 ##Tensorflow image recognition demo : tf_image
@@ -120,7 +120,7 @@ Please refer https://www.tensorflow.org/versions/r0.9/get_started/os_setup.html#
 **tf_image** : read the image stored in BigObject table and then run tensorflow image recognition
 
 ```
-bosh>send "select content from images where filename='cat.jpg'" to "./tf_image"
+bosh>send "select content from images where filename='cat.jpg'" to "tf_image"
 W tensorflow/core/framework/op_def_util.cc:332] Op BatchNormWithGlobalNormalization is deprecated. It will cease to work in GraphDef version 9. Use tf.nn.batch_normalization().
 tiger cat (score = 0.54326)
 tabby, tabby cat (score = 0.27918)
