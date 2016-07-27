@@ -9,6 +9,14 @@ sudo pip install scipy
 sudo pip install bosh
 ```
 
+## install to a BigObject docker container
+```
+docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
+sh pysetup2bo.sh bo
+```
+
+
+
 ## Kmean : kmean , getKmeanCent , getKmeanLabel
 
 **kmean**: compute k mean clustering
