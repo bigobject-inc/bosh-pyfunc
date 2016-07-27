@@ -21,7 +21,6 @@ sh pysetup2bo.sh bo
 bosh>CREATE TABLE sales_add ('order_id' STRING(63), 'Customer.id' STRING(63), 'Product.id' STRING(63), 'channel_name' STRING(63), 'Date' DATETIME32, 'qty' INT64, 'total_price' DOUBLE , 'new_str' STRING)
 bosh>send "select * from sales limit 10 " to "addConcatCol 2 3" return to sales_add;
 bosh>select * from sales_add limit 5
-bosh>select * from sales_add limit 5
 1,3226,2557,am/pm,2013-01-01 00:04:05,8,52.24,2557_am/pm
 2,6691,2631,am/pm,2013-01-01 00:11:27,4,39.72,2631_am/pm
 2,6691,1833,am/pm,2013-01-01 00:21:03,1,6.9,1833_am/pm
