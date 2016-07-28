@@ -2,7 +2,7 @@
 import sys
 
 def add_a_concat_col(ind_1, ind_2):
-	for line in sys.stdin:
+	for line in sys.stdin.readlines():
 		concat=line.split(',')[ind_1 - 1] + '_' + line.split(',')[ind_2 - 1]
 		if concat[-1] == '\n':
 			concat = concat[:-1]
