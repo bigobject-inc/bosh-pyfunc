@@ -14,7 +14,7 @@ pandas_print : fine print, for testing, cannnot to be used to "receive" and "ret
 
 pandas : csv format, for "receive" and "return to" case
 
-pandas \<function name\> [arguments]
+Usage : pandas | pandas_print  \<function name\> [arguments]
 
 known issues:  int argument only now.
 
