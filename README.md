@@ -31,6 +31,22 @@ bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 99
 3  4138  1626
 4  4138   999
 ```
+ex. cumulative sum
+```
+bosh>send "select Customer.id, Product.id, qty from sales limit 10" to "pandas cumsum"
+    col1   col2  col3
+0   3226   2557     8
+1   9917   5188    12
+2  16608   7021    13
+3  20746   8647    18
+4  24884   9022    24
+5  29022  12358    32
+6  33160  13094    38
+7  34452  17528    44
+8  40048  21663    54
+9  45644  25191    63
+```
+
 Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more functions.
 
 
