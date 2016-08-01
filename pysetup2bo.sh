@@ -16,3 +16,4 @@ docker cp ./addConcatCol $bo_docker_name:/usr/local/bin
 docker cp ./getKmeanCent $bo_docker_name:/usr/local/bin
 docker cp ./getKmeanLabel $bo_docker_name:/usr/local/bin
 docker cp ./kmean $bo_docker_name:/usr/local/bin
+docker cp ./pandas $bo_docker_name:/usr/local/bin
