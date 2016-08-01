@@ -21,6 +21,7 @@ col3 -0.007502  0.005097  1.000000
 ```
 
 ex. Trim values at input threshold(s). (**clip**)  min : 999, max : 5000
+
 Note: int argument only
 ```
 bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 999 5000"
