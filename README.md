@@ -68,7 +68,7 @@ bosh>select * from cumsum limit 5
 total row : 5
 ```
 
-Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions.
+Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions (DataFrame).
 
 
 ## column concat : addConcatCol
