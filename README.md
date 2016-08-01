@@ -10,6 +10,8 @@ sh pysetup2bo.sh bo
 ```
 
 ## run pandas Dataframe function : pandas
+known issues:  int argument only, "return to" unsupported, omitted results.
+
 ex. Compute pairwise correlation of Customer.id, Product.id, qty columns (**corr**)
 ```
 bosh>send "select Customer.id, Product.id, qty from sales" to "pandas corr"
@@ -21,8 +23,6 @@ col3 -0.007502  0.005097  1.000000
 ```
 
 ex. Trim values at input threshold(s). (**clip**)  min : 999, max : 5000
-
-Note: int argument only
 ```
 bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 999 5000"
    col1  col2
