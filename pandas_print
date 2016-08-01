@@ -14,8 +14,8 @@ def runPandas(func_name , args):
         	res = m(*arg)
    	else:
 		res = "Unknown function name"
-        print res.to_csv(sys.stdout, header=False, index=False)
-	#print res
+        #print res.to_csv(sys.stdout, header=False, index=False)
+	print res
 	
 
 if __name__ == "__main__":
