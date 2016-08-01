@@ -10,8 +10,6 @@ sh pysetup2bo.sh bo
 ```
 
 ## run pandas Dataframe function : pandas
-Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more functions.
-
 ex. Compute pairwise correlation of Customer.id, Product.id, qty columns (**corr**)
 ```
 bosh>send "select Customer.id, Product.id, qty from sales" to "pandas corr"
@@ -33,9 +31,10 @@ bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 99
 3  4138  1626
 4  4138   999
 ```
+Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more functions.
+
 
 ## column concat : addConcatCol
-
 ```
 bosh>CREATE TABLE sales_add ('order_id' STRING(63), 'Customer.id' STRING(63), 'Product.id' STRING(63), 'channel_name' STRING(63), 'Date' DATETIME32, 'qty' INT64, 'total_price' DOUBLE , 'new_str' STRING)
 bosh>send "select * from sales limit 10 " to "addConcatCol 3 4" return to sales_add;
