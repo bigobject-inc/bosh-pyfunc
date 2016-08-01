@@ -9,12 +9,15 @@ git clone https://github.com/bigobject-inc/bosh-pyfunc.git
 sh pysetup2bo.sh bo
 ```
 
-## run pandas Dataframe function : pandas
-known issues:  int argument only, "return to" unsupported, omitted results.
+## run pandas Dataframe function : pandas pandas_print
+pandas_print : fine print, for testing, cannnot to be used to "receive" and "return to".
+pandas : csv format, used to "receive" and "return to".
+
+known issues:  int argument only now.
 
 ex. Compute pairwise correlation of Customer.id, Product.id, qty columns (**corr**)
 ```
-bosh>send "select Customer.id, Product.id, qty from sales" to "pandas corr"
+bosh>send "select Customer.id, Product.id, qty from sales" to "pandas_print corr"
           col1      col2      col3
 col1  1.000000 -0.003237 -0.007502
 col2 -0.003237  1.000000  0.005097
@@ -24,7 +27,7 @@ col3 -0.007502  0.005097  1.000000
 
 ex. Trim values at input threshold(s). (**clip**)  min : 999, max : 5000
 ```
-bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 999 5000"
+bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas_print clip 999 5000"
    col1  col2
 0  3226  2557
 1  5000  2631
@@ -34,7 +37,7 @@ bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 99
 ```
 ex. cumulative sum
 ```
-bosh>send "select Customer.id, Product.id, qty from sales limit 10" to "pandas cumsum"
+bosh>send "select Customer.id, Product.id, qty from sales limit 10" to "pandas_print cumsum"
     col1   col2  col3
 0   3226   2557     8
 1   9917   5188    12
@@ -46,6 +49,20 @@ bosh>send "select Customer.id, Product.id, qty from sales limit 10" to "pandas c
 7  34452  17528    44
 8  40048  21663    54
 9  45644  25191    63
+```
+
+ex. use pandas to save the result to a table
+```
+bosh>create table cumsum (col1 INT32, col2 INT32 , col3 INT32)
+bosh>send "select Customer.id, Product.id, qty from sales limit 100" to "pandas cumsum" return to cumsum
+bosh>select * from cumsum limit 5
+3226,2557,8
+9917,5188,12
+16608,7021,13
+20746,8647,18
+24884,9022,24
+=============
+total row : 5
 ```
 
 Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions.
