@@ -9,7 +9,7 @@ git clone https://github.com/bigobject-inc/bosh-pyfunc.git
 sh pysetup2bo.sh bo
 ```
 
-## run pandas Dataframe function : pandas pandas_print
+## run pandas Dataframe function : pandas, pandas_print
 pandas_print : fine print, for testing, cannnot to be used to "receive" and "return to".
 pandas : csv format, used to "receive" and "return to".
 
