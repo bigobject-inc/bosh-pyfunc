@@ -1,33 +1,11 @@
 # bosh-pyfunc
-python functions for BigObject python bosh
-
-requirement: bosh 0.2.18+ , numpy, scipy
-```
-sudo pip install --upgrade pip
-sudo pip install numpy
-sudo pip install scipy
-sudo pip install bosh
-```
+python plugin functions for BigObject
 
 ## install to a BigObject docker container
 ```
 docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
+git clone https://github.com/bigobject-inc/bosh-pyfunc.git
 sh pysetup2bo.sh bo
-```
-
-## column concat : addConcatCol
-
-```
-bosh>CREATE TABLE sales_add ('order_id' STRING(63), 'Customer.id' STRING(63), 'Product.id' STRING(63), 'channel_name' STRING(63), 'Date' DATETIME32, 'qty' INT64, 'total_price' DOUBLE , 'new_str' STRING)
-bosh>send "select * from sales limit 10 " to "addConcatCol 3 4" return to sales_add;
-bosh>select * from sales_add limit 5
-1,3226,2557,am/pm,2013-01-01 00:04:05,8,52.24,2557_am/pm
-2,6691,2631,am/pm,2013-01-01 00:11:27,4,39.72,2631_am/pm
-2,6691,1833,am/pm,2013-01-01 00:21:03,1,6.9,1833_am/pm
-3,4138,1626,am/pm,2013-01-01 00:30:22,5,42.1,1626_am/pm
-3,4138,375,am/pm,2013-01-01 00:35:44,6,67.26,375_am/pm
-=============
-total row : 5
 ```
 
 ## run pandas Dataframe function : pandas
@@ -53,6 +31,21 @@ bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 99
 2  5000  1833
 3  4138  1626
 4  4138   999
+```
+
+## column concat : addConcatCol
+
+```
+bosh>CREATE TABLE sales_add ('order_id' STRING(63), 'Customer.id' STRING(63), 'Product.id' STRING(63), 'channel_name' STRING(63), 'Date' DATETIME32, 'qty' INT64, 'total_price' DOUBLE , 'new_str' STRING)
+bosh>send "select * from sales limit 10 " to "addConcatCol 3 4" return to sales_add;
+bosh>select * from sales_add limit 5
+1,3226,2557,am/pm,2013-01-01 00:04:05,8,52.24,2557_am/pm
+2,6691,2631,am/pm,2013-01-01 00:11:27,4,39.72,2631_am/pm
+2,6691,1833,am/pm,2013-01-01 00:21:03,1,6.9,1833_am/pm
+3,4138,1626,am/pm,2013-01-01 00:30:22,5,42.1,1626_am/pm
+3,4138,375,am/pm,2013-01-01 00:35:44,6,67.26,375_am/pm
+=============
+total row : 5
 ```
 
 ## Kmean : kmean , getKmeanCent , getKmeanLabel
@@ -109,6 +102,12 @@ bosh>select * from label
 total row : 10
 
 ```
+
+
+
+==================================================================================
+These following functions does not include in installation script
+==================================================================================
 
 ## Load images : loadImage, loadImagePath, imgstr2file (use base64 coding)
 
