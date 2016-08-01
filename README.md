@@ -2,6 +2,7 @@
 python plugin functions for BigObject
 
 ## install to a BigObject docker container
+The installation script will install python and some python library in your bigobject container.
 ```
 docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
 git clone https://github.com/bigobject-inc/bosh-pyfunc.git
