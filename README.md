@@ -14,6 +14,8 @@ pandas_print : fine print, for testing, cannnot to be used to "receive" and "ret
 
 pandas : csv format, for "receive" and "return to" case
 
+pandas <function name> <arguments>
+
 known issues:  int argument only now.
 
 ex. Compute pairwise correlation of Customer.id, Product.id, qty columns (**corr**)
