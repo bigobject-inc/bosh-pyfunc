@@ -48,7 +48,7 @@ bosh>send "select Customer.id, Product.id, qty from sales limit 10" to "pandas c
 9  45644  25191    63
 ```
 
-Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more functions.
+Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions.
 
 
 ## column concat : addConcatCol
