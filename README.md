@@ -30,6 +30,30 @@ bosh>select * from sales_add limit 5
 total row : 5
 ```
 
+## run pandas Dataframe function : pandas
+Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more functions.
+
+ex. Compute pairwise correlation of Customer.id, Product.id, qty columns (**corr**)
+```
+bosh>send "select Customer.id, Product.id, qty from sales" to "pandas corr"
+          col1      col2      col3
+col1  1.000000 -0.003237 -0.007502
+col2 -0.003237  1.000000  0.005097
+col3 -0.007502  0.005097  1.000000
+
+```
+
+ex. Trim values at input threshold(s). (**clip**)  min : 999, max : 5000
+Note: int argument only
+```
+bosh>send "select Customer.id, Product.id from sales limit 5" to "pandas clip 999 5000"
+   col1  col2
+0  3226  2557
+1  5000  2631
+2  5000  1833
+3  4138  1626
+4  4138   999
+```
 
 ## Kmean : kmean , getKmeanCent , getKmeanLabel
 
