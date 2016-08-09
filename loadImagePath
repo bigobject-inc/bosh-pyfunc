@@ -13,10 +13,10 @@ def list_file(path):
 def load_image_path(path):
 	file_list = list_file(path)
 	for f_i in file_list:
-		print f_i + " " + loadImage.image2base64(path + "/" + f_i)
+		print f_i + "," + loadImage.image2base64(path + "/" + f_i)
 
 if __name__ == "__main__":
-	loadImage = imp.load_source('loadImage', './loadImage')
+	loadImage = imp.load_source('loadImage', '/usr/local/bin/loadImage')
 	pic_path = sys.argv[1]
 	load_image_path(pic_path)
 

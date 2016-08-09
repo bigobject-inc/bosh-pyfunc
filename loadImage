@@ -10,6 +10,6 @@ def image2base64(filename):
 if __name__ == "__main__":
 	pic_file = sys.argv[1]
 	pic_data = image2base64(pic_file)
-	print pic_file + " " + pic_data
+	print pic_file + "," + pic_data
 	
 

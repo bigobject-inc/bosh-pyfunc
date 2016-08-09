@@ -7,9 +7,9 @@ import os
 if __name__ == "__main__":
 	#save_file = sys.argv[1]
 	data_str = sys.stdin.read()
-	imgstr2file = imp.load_source('imgstr2file', './imgstr2file')
+	imgstr2file = imp.load_source('imgstr2file', '/usr/local/bin/imgstr2file')
 	#print save_file
 	imgstr2file.base642image(data_str,"tmp.jpg")
 	os.system('python /usr/local/lib/python2.7/dist-packages/tensorflow/models/image/imagenet/classify_image.py --image_file tmp.jpg')
-	os.system('gpicview tmp.jpg &')
+#	os.system('gpicview tmp.jpg &')
 
