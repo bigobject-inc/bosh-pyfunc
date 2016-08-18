@@ -157,9 +157,9 @@ The table name "_print" is used to print the result in screen.
 
 You can add alias for remote server.
 
-**remote add_alias <name> <BigObject ip:port>** 
+**remote add_alias \<name\> \<BigObject ip:port\>** 
 
-**remote del_alias <name>** 
+**remote del_alias \<name\>** 
 
 **remote list_alias** 
 
