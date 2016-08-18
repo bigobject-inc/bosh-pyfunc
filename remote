@@ -59,12 +59,46 @@ def getData(server,cmdStr,show_total_count , workspace_name , timeout=9999):
 
 
 if __name__ == "__main__":
-	if len(sys.argv) > 2:
+
+	import numpy as np
+	import os.path
+
+	server_alias_dict = {}
+	if os.path.isfile('server_alias.npy') == True:
+		server_alias_dict = np.load('server_alias.npy').item()
+
+	alias_cmd = False
+	if len(sys.argv) > 1:
 		host = sys.argv[1]
+		if host == "add_alias" and len(sys.argv) > 3:
+			server_alias_dict[sys.argv[2]] = sys.argv[3]
+			np.save('server_alias.npy', server_alias_dict) 
+			alias_cmd = True
+			print "alias added : " + sys.argv[2] + " = " + sys.argv[3]
+		if host == "list_alias":
+			alias_cmd = True
+			print server_alias_dict
+		if host == "del_alias":
+			del server_alias_dict[sys.argv[2]]
+			np.save('server_alias.npy', server_alias_dict) 
+			alias_cmd = True
+			print "alias delete : " + sys.argv[2]
+
+	if len(sys.argv) > 2 and alias_cmd == False:
+		real_host = host
+		if host in server_alias_dict:
+			real_host = server_alias_dict[host]
+			if real_host[:4] != "http":
+				real_host = "http://" + real_host
+			if real_host[-4:] != "/cmd":
+				real_host = real_host + "/cmd"
+	
+		else:
+			real_host = "http://" + host + "/cmd"
 		stmt = ' '.join(sys.argv[2:])
 		## no workspace setting now1
-		getData("http://" + host + "/cmd" , stmt[1:-1], False, "")
-	else:
+		getData( real_host , stmt[1:-1], False, "")
+	elif alias_cmd == False:
 		print "remote <host> <statement>"
 
 
