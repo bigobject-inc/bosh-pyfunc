@@ -142,14 +142,48 @@ total row : 10
 
 ## remote 
 **remote**: perform statements in a remote BigObject server 
-ex. show remote server's data by a query
+
+ex. show remote server (192.168.1.184:9090) data by the query "select * from sales limit 5"
 ```
-bosh>receive _print from "remote 192.168.1.184 'select * from sales limit 5'"
+bosh>receive _print from "remote 192.168.1.184:9090 'select * from sales limit 5'"
 1,3226,2557,am/pm,2013-01-01 01:11:11,8,52.24
 2,6691,2631,am/pm,2013-01-01 02:23:27,4,39.72
 2,6691,1833,am/pm,2013-01-01 02:49:09,1,6.9
 3,4138,1626,am/pm,2013-01-01 04:11:16,5,42.1
 3,4138,375,am/pm,2013-01-01 04:15:26,6,67.26
+```
+
+The table name "_print" is used to print the result in screen.
+
+You can add alias for remote server.
+**remote add_alias <name> <BigObject ip:port>** 
+**remote del_alias <name>** 
+**remote list_alias** 
+
+```
+bosh>receive _print from "remote add_alias rpi2 192.168.1.184:9090"
+alias added : rpi2 = 192.168.1.184:9090
+
+bosh>receive _print from "remote add_alias rpi 192.168.1.194:9090"
+alias added : rpi = 192.168.1.194:9090
+
+bosh>receive _print from "remote list_alias "
+{'rpi': '192.168.1.194:9090', 'rpi2': '192.168.1.184:9090'}
+
+bosh>receive _print from "remote del_alias rpi "
+alias delete : rpi
+
+bosh>receive _print from "remote list_alias "
+{'rpi2': '192.168.1.184:9090'}
+```
+
+After an alias added, you can use this name to access the remote BigObject server. 
+
+```
+bosh>receive _print from "remote rpi2 'select * from sales last 3' "
+5127,3284,3674,amazon,2013-12-29 00:00:42,3,20.76
+5127,3284,2642,am/pm,2013-12-29 01:11:12,3,43.74
+5127,3284,1091,7-11,2013-12-29 02:08:20,5,46.05
 ```
 
 
