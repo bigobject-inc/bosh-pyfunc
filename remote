@@ -63,7 +63,7 @@ if __name__ == "__main__":
 		host = sys.argv[1]
 		stmt = ' '.join(sys.argv[2:])
 		## no workspace setting now1
-		getData("http://" + host + ":9090/cmd" , stmt[1:-1], False, "")
+		getData("http://" + host + "/cmd" , stmt[1:-1], False, "")
 	else:
 		print "remote <host> <statement>"
 
