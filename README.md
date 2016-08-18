@@ -140,6 +140,17 @@ total row : 10
 
 ```
 
+## remote 
+**remote**: perform statements in a remote BigObject server 
+ex. show remote server's data by a query
+```
+bosh>receive _print from "remote 192.168.1.184 'select * from sales limit 5'"
+1,3226,2557,am/pm,2013-01-01 01:11:11,8,52.24
+2,6691,2631,am/pm,2013-01-01 02:23:27,4,39.72
+2,6691,1833,am/pm,2013-01-01 02:49:09,1,6.9
+3,4138,1626,am/pm,2013-01-01 04:11:16,5,42.1
+3,4138,375,am/pm,2013-01-01 04:15:26,6,67.26
+```
 
 
 ==================================================================================
