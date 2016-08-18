@@ -18,3 +18,4 @@ docker cp ./getKmeanLabel $bo_docker_name:/usr/local/bin
 docker cp ./kmean $bo_docker_name:/usr/local/bin
 docker cp ./pandas $bo_docker_name:/usr/local/bin
 docker cp ./pandas_print $bo_docker_name:/usr/local/bin
+docker cp ./remote $bo_docker_name:/usr/local/bin

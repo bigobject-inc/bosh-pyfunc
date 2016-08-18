@@ -1,0 +1,70 @@
+#!/usr/bin/python
+import sys
+import json
+import requests
+
+
+def printdata(data_str):
+	data = json.loads(data_str)
+	count = 0
+	if(type(data['Content']) != dict):
+		if json.dumps(data['Content']) != "null":
+			if data['Content'] != "":
+				print(json.dumps(data['Content'], indent=4))
+		else:
+			if data['Err']!= "":
+				print(json.dumps(data['Err'], indent=4))
+		return 0	
+
+	if 'content' in data['Content'].keys():
+		for row in data['Content']['content']:
+			#print(row)
+			print_row=""
+			for record in row:
+				if print_row != "":
+					print_row += ","
+                    		print_row += str(record).decode('utf-8')
+			print(print_row)		
+			#print(row)
+			count+=1
+	else:
+		if data['Content'] != "":
+			print("\"" + json.dumps(data['Content'],ensure_ascii=False) + "\"")
+	
+	return count
+
+def json_stream(fp):
+	for line in fp:
+		#print(line)
+		yield json.loads(line)
+
+def cmd2JSON(cmd , workspace_name=""):
+	return json.dumps({'Stmt':cmd,'Workspace':workspace_name,'Opts':{}})
+
+def getData(server,cmdStr,show_total_count , workspace_name , timeout=9999):
+	r = requests.post(server,data=cmd2JSON(cmdStr, workspace_name) , stream=True , timeout=timeout)
+	#print(r)
+	total_row = 0
+	check_save = True
+	for content in json_stream(r.raw):
+		total_row += printdata(json.dumps(content))
+		if(check_save == True and total_row > 1000):
+			check_save = resDataSave(server, cmdStr)
+			if check_save == True:
+				show_total_count = False
+				break				
+
+	if show_total_count == True :
+		print("=============\ntotal row : " + str(total_row))	
+
+
+if __name__ == "__main__":
+	if len(sys.argv) > 2:
+		host = sys.argv[1]
+		stmt = ' '.join(sys.argv[2:])
+		## no workspace setting now1
+		getData("http://" + host + ":9090/cmd" , stmt[1:-1], False, "")
+	else:
+		print "remote <host> <statement>"
+
+
