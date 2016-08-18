@@ -156,8 +156,11 @@ bosh>receive _print from "remote 192.168.1.184:9090 'select * from sales limit 5
 The table name "_print" is used to print the result in screen.
 
 You can add alias for remote server.
+
 **remote add_alias <name> <BigObject ip:port>** 
+
 **remote del_alias <name>** 
+
 **remote list_alias** 
 
 ```
