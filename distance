@@ -1,0 +1,32 @@
+#!/usr/bin/python
+import sys
+import numpy as np
+from scipy.spatial import distance
+
+def dist(query_feature, thre, data_col_start, data_col_end, dist_type):
+	printrow = 0
+	line = sys.stdin.readline()
+
+	dist_func = getattr(distance, dist_type, None)
+	if callable(dist_func) == False:
+		print "Unknown function name"
+		exit(1)
+
+	while line:
+		feature = np.array(line.strip().split(',')[int(data_col_start) - 1:int(data_col_end)]).astype(np.float64)
+		arg = [feature, query_feature]
+        	dist = dist_func(*arg)
+		if dist < float(thre):
+			print line.strip() + "," + str(dist)
+			printrow = printrow + 1
+
+		line = sys.stdin.readline()
+
+	if printrow == 0:
+		print "no similar result"
+
+if __name__ == "__main__":
+	#arguments : <threshold> , <feature start col> , <feature end col> , <distance function> , <query data>
+	query_feature = np.array(sys.argv[5:]).astype(np.float64)
+	dist(query_feature , sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+
