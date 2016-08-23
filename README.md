@@ -189,6 +189,39 @@ bosh>receive _print from "remote rpi2 'select * from sales last 3' "
 5127,3284,1091,7-11,2013-12-29 02:08:20,5,46.05
 ```
 
+## distance
+**distance**: compute the distance between the argument feature vector and feature vectors in a table and then show the rows which less than a preset threshold.
+
+arguments : \<threshold\> , \<feature start col\> , \<feature end col\> , \<distance function\> , \<query data\>
+
+Refer http://docs.scipy.org/doc/scipy/reference/spatial.distance.html#module-scipy.spatial.distance for the available distance functions. 
+
+PS. only support the function with 2 arguments. ex. euclidean, cosine, ...
+
+ex. the feature vector [9 51], compute euclidean distance and show the rows which distance is less than 30, the features placed in the 1~2 columns
+
+```
+bosh>send "select qty, total_price from sales limit 10" to "distance 30 1 2 euclidean 9 51"
+8,52.24,1.59298462014
+4,39.72,12.3384926146
+5,42.1,9.7575611707
+6,67.26,16.5344367911
+8,41.68,9.37349454579
+6,56.4,6.17737808459
+10,50.1,1.34536240471
+
+```
+ex. the feature vector [9 51], compute cosine distance and show the rows which distance is less than 0.001, the features placed in the 6~7 columns
+
+```
+bosh>send "select * from sales limit 10" to "distance 0.001 6 7 cosine 9 51"
+1,3226,2557,am/pm,2013-01-01 00:04:05,8,52.24,0.00025793815211
+2,6691,1833,am/pm,2013-01-01 00:21:03,1,6.9,0.000472644069336
+3,4138,3336,am/pm,2013-01-01 00:45:12,8,41.68,0.000111900443786
+5,5596,4135,7-11,2013-01-01 01:08:42,10,50.1,0.000249515888964
+
+```
+
 
 ==================================================================================
 These following functions does not include in installation script
