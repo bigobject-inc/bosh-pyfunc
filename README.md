@@ -221,7 +221,7 @@ arguments : \<print source data\> \<eval_string\>
 
 \<print source data\> : True or False
 
-Input data will be formed as an **string** array "a". You can use index to access data; for example, a[0] is the first column of the input data.
+Input data will be formed as an **string** array named "a". You can use index to access data; for example, a[0] is the first column of the input data.
 
 ex. string concat : Customer.id + Date + '~~~~~~~' + total_price
 
