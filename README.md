@@ -153,9 +153,9 @@ bosh>receive _print from "remote 192.168.1.184:9090 'select * from sales limit 5
 3,4138,375,am/pm,2013-01-01 04:15:26,6,67.26
 ```
 
-The table name "_print" is used to print the result in screen.
+The table name "_print" is used to print the result in screen. 
 
-You can add alias for remote server.
+You can add an alias for a remote server.
 
 **remote add_alias \<name\> \<BigObject ip:port\>** 
 
@@ -188,6 +188,9 @@ bosh>receive _print from "remote rpi2 'select * from sales last 3' "
 5127,3284,2642,am/pm,2013-12-29 01:11:12,3,43.74
 5127,3284,1091,7-11,2013-12-29 02:08:20,5,46.05
 ```
+
+The table name also can be set a general table name to save the remote table to the local machine.
+
 
 ## distance
 **distance**: compute the distance between the argument feature vector and feature vectors in a table and then show the rows which less than a preset threshold.
