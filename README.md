@@ -71,8 +71,6 @@ total row : 5
 Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions (DataFrame).
 
 
-~~column concat : addConcatCol~~ : removed since eval can do this better 
-
 ## Kmean : kmean , getKmeanCent , getKmeanLabel
 
 **kmean**: compute k mean clustering
@@ -222,7 +220,7 @@ arguments : \<print source data\> \<eval_string\>
 
 Input data will be formed as an **string** array "a". You can use index to access data; for example, a[0] is the first column of the input data.
 
-ex. string concat
+ex. string concat : Customer.id + Date + '~~~~~~~' + total_price
 
 ```
 bosh>send "select * from sales limit 5" to "eval True a[1] + a[4] + '~~~~~~~' + a[6]"
@@ -248,7 +246,7 @@ bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval Fals
 
 ```
 
-The available function of the eval string is the basic python and the "math" module.
+The basic python and the functions of the "math" module can be used to in eval
 
 ex. (square root of ( Product.id - qty ))  + 1
 ```
