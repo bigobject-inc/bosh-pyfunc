@@ -71,7 +71,7 @@ total row : 5
 Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions (DataFrame).
 
 
-~~## column concat : addConcatCol~~ : removed since eval can do this better
+~~column concat : addConcatCol~~ : removed since eval can do this better 
 
 ## Kmean : kmean , getKmeanCent , getKmeanLabel
 
@@ -218,7 +218,7 @@ bosh>send "select * from sales limit 10" to "distance 0.001 6 7 cosine 9 51"
 
 arguments : \<print source data\> \<eval_string\> 
 
-          \<print source data\> : True or False
+\<print source data\> : True or False
 
 Input data will be formed as an **string** array "a". You can use index to access data; for example, a[0] is the first column of the input data.
 
