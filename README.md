@@ -127,7 +127,7 @@ total row : 10
 ```
 
 ## remote 
-**remote**: perform statements in a remote BigObject server 
+**remote**: perform statements to a remote BigObject server 
 
 ex. show remote server (192.168.1.184:9090) data by the query "select * from sales limit 5"
 ```
