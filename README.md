@@ -71,19 +71,7 @@ total row : 5
 Please refer http://pandas.pydata.org/pandas-docs/stable/api.html#api-dataframe-stats for more available functions (DataFrame).
 
 
-## column concat : addConcatCol
-```
-bosh>CREATE TABLE sales_add ('order_id' STRING(63), 'Customer.id' STRING(63), 'Product.id' STRING(63), 'channel_name' STRING(63), 'Date' DATETIME32, 'qty' INT64, 'total_price' DOUBLE , 'new_str' STRING)
-bosh>send "select * from sales limit 10 " to "addConcatCol 3 4" return to sales_add;
-bosh>select * from sales_add limit 5
-1,3226,2557,am/pm,2013-01-01 00:04:05,8,52.24,2557_am/pm
-2,6691,2631,am/pm,2013-01-01 00:11:27,4,39.72,2631_am/pm
-2,6691,1833,am/pm,2013-01-01 00:21:03,1,6.9,1833_am/pm
-3,4138,1626,am/pm,2013-01-01 00:30:22,5,42.1,1626_am/pm
-3,4138,375,am/pm,2013-01-01 00:35:44,6,67.26,375_am/pm
-=============
-total row : 5
-```
+~~## column concat : addConcatCol~~ : removed since eval can do this better
 
 ## Kmean : kmean , getKmeanCent , getKmeanLabel
 
@@ -224,6 +212,38 @@ bosh>send "select * from sales limit 10" to "distance 0.001 6 7 cosine 9 51"
 5,5596,4135,7-11,2013-01-01 01:08:42,10,50.1,0.000249515888964
 
 ```
+
+## eval
+**eval**: run a given python string
+
+arguments : \<print source data\> \<eval_string\> 
+
+          \<print source data\> : True or False
+
+Input data will be formed as an **string** array "a". You can use index to access data; for example, a[0] is the first column of the input data.
+
+ex. string concat
+
+```
+bosh>send "select * from sales limit 10" to "eval True a[1] + a[4] + '~~~~~~~' + a[6]"
+``` 
+
+ex. Arithmetic equation. (You need to convert the type)
+
+```
+bosh>send "select Product.id, qty, total_price from sales limit 10" to "eval False (float(a[0]) + float(a[2]) / float(a[1]) ) "
+```
+
+The available function of the eval string is the basic python and the "math" module.
+
+ex. 
+```
+bosh>send "select Product.id, qty, total_price from sales limit 10" to "eval False math.sqrt( float(a[0]) - float(a[2]) )"
+```
+
+Please refer https://docs.python.org/2/library/math.html for the "math" module
+
+
 
 
 ==================================================================================
