@@ -225,20 +225,39 @@ Input data will be formed as an **string** array "a". You can use index to acces
 ex. string concat
 
 ```
-bosh>send "select * from sales limit 10" to "eval True a[1] + a[4] + '~~~~~~~' + a[6]"
+bosh>send "select * from sales limit 5" to "eval True a[1] + a[4] + '~~~~~~~' + a[6]"
+1,3226,2557,am/pm,2013-01-01 00:04:05,8,52.24,32262013-01-01 00:04:05~~~~~~~52.24
+2,6691,2631,am/pm,2013-01-01 00:11:27,4,39.72,66912013-01-01 00:11:27~~~~~~~39.72
+2,6691,1833,am/pm,2013-01-01 00:21:03,1,6.9,66912013-01-01 00:21:03~~~~~~~6.9
+3,4138,1626,am/pm,2013-01-01 00:30:22,5,42.1,41382013-01-01 00:30:22~~~~~~~42.1
+3,4138,375,am/pm,2013-01-01 00:35:44,6,67.26,41382013-01-01 00:35:44~~~~~~~67.26
+
 ``` 
 
 ex. Arithmetic equation. (You need to convert the type)
 
+( Product.id + total_price ) / qty
+
 ```
-bosh>send "select Product.id, qty, total_price from sales limit 10" to "eval False (float(a[0]) + float(a[2]) / float(a[1]) ) "
+bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval False (float(a[0]) + float(a[2]) / float(a[1]) ) "
+2563.53
+2640.93
+1839.9
+1634.42
+386.21
+
 ```
 
 The available function of the eval string is the basic python and the "math" module.
 
-ex. 
+ex. (square root of ( Product.id - qty ))  + 1
 ```
-bosh>send "select Product.id, qty, total_price from sales limit 10" to "eval False math.sqrt( float(a[0]) - float(a[2]) )"
+bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval True math.sqrt( float(a[0]) - float(a[2])) + 1"
+2557,8,52.24,51.0475773639
+2631,4,39.72,51.9046166865
+1833,1,6.9,43.7328913134
+1626,5,42.1,40.7982411672
+375,6,67.26,18.5425197734
 ```
 
 Please refer https://docs.python.org/2/library/math.html for the "math" module
