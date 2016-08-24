@@ -176,7 +176,10 @@ bosh>receive _print from "remote rpi2 'select * from sales last 3' "
 ```
 
 The table name also can be set a general table name to save the remote table to the local machine.
-
+ex.
+```
+bosh>receive tmp_table from "remote rpi2 'select * from sales last 3' "
+```
 
 ## distance
 **distance**: compute the distance between the argument feature vector and feature vectors in a table and then show the rows which less than a preset threshold.
