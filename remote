@@ -45,14 +45,14 @@ def getData(server,cmdStr,show_total_count , workspace_name , timeout=9999):
 	r = requests.post(server,data=cmd2JSON(cmdStr, workspace_name) , stream=True , timeout=timeout)
 	#print(r)
 	total_row = 0
-	check_save = True
+	#check_save = True
 	for content in json_stream(r.raw):
 		total_row += printdata(json.dumps(content))
-		if(check_save == True and total_row > 1000):
-			check_save = resDataSave(server, cmdStr)
-			if check_save == True:
-				show_total_count = False
-				break				
+#		if(check_save == True and total_row > 1000):
+#			check_save = resDataSave(server, cmdStr)
+#			if check_save == True:
+#				show_total_count = False
+#				break				
 
 	if show_total_count == True :
 		print("=============\ntotal row : " + str(total_row))	
