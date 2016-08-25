@@ -264,6 +264,64 @@ bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval True
 Please refer https://docs.python.org/2/library/math.html for the "math" module
 
 
+==================================================================================
+## DNN demo
+
+## install to a BigObject docker container
+The installation script will install python and some python library in your bigobject container.
+```
+docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
+git clone https://github.com/bigobject-inc/bosh-pyfunc.git
+sh tfsetup2bo.sh bo
+```
+
+The demo use tensorflow DNNclassifier to demonstrate how to use BigObject as a data source to train a deep neural network and then predict by the trained model.
+
+1. create a feature table. Since the sample data is not a feature vector, we use the above-mentioned 'eval' function to normalize the data to similar a feature vector dataset. 
+
+The Product.id, Customer.id and total_price are normalized to a float point data. and the qty column is set as a label for training.
+```
+bosh>create table feature (f1 FLOAT, f2 FLOAT, f3 FLOAT , lab INT32)
+bosh>send 'select Product.id, Customer.id, total_price, qty from sales limit 100' to 'eval False str(float(a[0])/1000)+ "," + str(float(a[1]) / 1000) + "," + str(float(a[2])/10) + "," +a[3]' return to feature
+
+```
+The processed feature table :
+```
+bosh>select * from feature limit 5
+2.557,3.226,5.224,8
+2.631,6.691,3.972,4
+1.833,6.691,0.69,1
+1.626,4.138,4.21,5
+0.375,4.138,6.726,6
+```
+
+2. set the first 90 rows as a trainning set
+```
+bosh>send 'select * from feature limit 90' to 'DNNset'
+feature inserted : 90 rows
+```
+
+3. Since the range of qty is 1~10, we set 10 classes in the DNNclassifer. the model is 3 layer DNN with 100, 200, 100 units and trained 2000 steps.
+```
+bosh>receive _print from 'DNNtrain 10'
+```
+
+4. use the trained model to predict the last 10 rows to test the trained model. and then check the real label (qty)
+```
+bosh>send 'select f1,f2,f3 from feature last 10' to 'DNNpredict 10'
+Predictions: [2 8 2 5 2 2 2 8 8 2]
+bosh>select lab from feature last 10
+2
+3
+1
+5
+2
+2
+4
+10
+10
+2
+```
 
 
 ==================================================================================
