@@ -269,6 +269,7 @@ Please refer https://docs.python.org/2/library/math.html for the "math" module
 
 ## install to a BigObject docker container
 The installation script will install python and some python library in your bigobject container.
+the script tfsetup2bo.sh only work on ubuntu now.
 ```
 docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
 git clone https://github.com/bigobject-inc/bosh-pyfunc.git
