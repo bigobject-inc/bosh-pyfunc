@@ -1,0 +1,29 @@
+#!/usr/bin/python
+import tensorflow as tf
+import numpy as np
+import sys, os
+
+def predict(class_num):
+	train_model_dir = "./tmp_DNNmodel"
+	data = np.loadtxt(sys.stdin, delimiter=',' ,dtype=np.float)
+	data = np.array(data)
+	classifier = tf.contrib.learn.DNNClassifier(hidden_units=[100, 200, 100], n_classes=int(class_num), model_dir=train_model_dir)
+	TESTING_DATA = "_test.csv"
+	test_set = tf.contrib.learn.datasets.base.load_csv(filename=TESTING_DATA,target_dtype=np.float32 , has_header=False)
+
+	testdata_col = np.array(test_set.data)
+	testdata_col = testdata_col.astype(np.float)
+	testtarget_col = np.array(test_set.target)
+	testtarget_col = testtarget_col.astype(np.float).astype(np.int32)
+
+	classifier.partial_fit(x=testdata_col,y=testtarget_col, steps=1)
+
+	y = classifier.predict(data)
+	print('Predictions: {}'.format(str(y)))
+
+if __name__ == "__main__":
+	class_num = 3
+	if len(sys.argv) > 1:
+		class_num = sys.argv[1]
+
+	predict(class_num)

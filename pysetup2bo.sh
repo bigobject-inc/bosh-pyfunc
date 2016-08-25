@@ -21,3 +21,4 @@ docker cp ./pandas_print $bo_docker_name:/usr/local/bin
 docker cp ./remote $bo_docker_name:/usr/local/bin
 docker cp ./distance $bo_docker_name:/usr/local/bin
 docker cp ./eval $bo_docker_name:/usr/local/bin
+

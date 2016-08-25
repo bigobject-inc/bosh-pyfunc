@@ -1,0 +1,36 @@
+#!/usr/bin/python
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import tensorflow as tf
+import numpy as np
+import sys
+def train(class_num):
+	train_model_dir = "./tmp_DNNmodel"
+	import shutil
+	shutil.rmtree(train_model_dir, ignore_errors=True)
+
+	# Data sets
+	TRAINING_DATA = "_feature.csv"
+	# Load datasets.
+	training_set = tf.contrib.learn.datasets.base.load_csv(filename=TRAINING_DATA, target_dtype=np.float32 , has_header=False)
+
+	# Build 3 layer DNN with 10, 20, 10 units respectively.
+	classifier = tf.contrib.learn.DNNClassifier(hidden_units=[100, 200, 100], n_classes=int(class_num), model_dir=train_model_dir)
+
+	# Fit model.
+	data_col = np.array(training_set.data)
+	data_col = data_col.astype(np.float)
+	target_col = np.array(training_set.target)
+	target_col = target_col.astype(np.float).astype(np.int32)
+	
+	tf.logging.set_verbosity(tf.logging.INFO)
+	
+	classifier.partial_fit(x=data_col,y=target_col, steps=2000)
+
+if __name__ == "__main__":
+	class_num = 3
+	if len(sys.argv) > 1:
+		class_num = sys.argv[1]
+	train(class_num);
