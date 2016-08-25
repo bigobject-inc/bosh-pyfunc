@@ -278,7 +278,7 @@ sh tfsetup2bo.sh bo
 
 The demo use tensorflow DNNclassifier to demonstrate how to use BigObject as a data source to train a deep neural network and then predict by the trained model.
 
-1. create a feature table. Since the sample data is not a feature vector, we use the above-mentioned 'eval' function to normalize the data to similar a feature vector dataset. 
+1.create a feature table. Since the sample data is not a feature vector, we use the above-mentioned 'eval' function to normalize the data to similar a feature vector dataset. 
 
 The Product.id, Customer.id and total_price are normalized to a float point data. and the qty column is set as a label for training.
 ```
@@ -296,18 +296,18 @@ bosh>select * from feature limit 5
 0.375,4.138,6.726,6
 ```
 
-2. set the first 90 rows as a trainning set
+2.set the first 90 rows as a trainning set
 ```
 bosh>send 'select * from feature limit 90' to 'DNNset'
 feature inserted : 90 rows
 ```
 
-3. Since the range of qty is 1~10, we set 10 classes in the DNNclassifer. the model is 3 layer DNN with 100, 200, 100 units and trained 2000 steps.
+3.Since the range of qty is 1~10, we set 10 classes in the DNNclassifer. the model is 3 layer DNN with 100, 200, 100 units and trained 2000 steps.
 ```
 bosh>receive _print from 'DNNtrain 10'
 ```
 
-4. use the trained model to predict the last 10 rows to test the trained model. and then check the real label (qty)
+4.use the trained model to predict the last 10 rows to test the trained model. and then check the real label (qty)
 ```
 bosh>send 'select f1,f2,f3 from feature last 10' to 'DNNpredict 10'
 Predictions: [2 8 2 5 2 2 2 8 8 2]
