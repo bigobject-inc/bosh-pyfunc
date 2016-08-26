@@ -273,6 +273,7 @@ the script tfsetup2bo.sh only work on ubuntu now.
 ```
 docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
 git clone https://github.com/bigobject-inc/bosh-pyfunc.git
+sh pysetup2bo.sh bo
 sh tfsetup2bo.sh bo
 ```
 
