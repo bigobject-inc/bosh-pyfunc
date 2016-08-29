@@ -313,17 +313,17 @@ bosh>receive _print from 'DNNtrain 10'
 bosh>send 'select f1,f2,f3 from feature last 10' to 'DNNpredict 10'
 Predictions: [2 2 1 5 2 2 5 8 8 2]
 bosh>select * from feature last 10
-14.93,2.986,3.54,2
-7.5,2.25,0.093,3
-14.73,1.473,0.315,1
-5.75,2.875,1.78,5
-5.75,1.15,0.518,2
-11.55,2.31,2.067,2
-6.6,2.64,1.88,4
-9.4,9.4,0.806,10
-7.67,7.67,0.043,10
-14.3,2.86,1.354,2
-
+bosh>select lab from feature last 10
+2
+3
+1
+5
+2
+2
+4
+10
+10
+2
 ```
 
 
