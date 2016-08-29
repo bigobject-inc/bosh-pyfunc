@@ -284,17 +284,17 @@ The demo use tensorflow DNNclassifier to demonstrate how to use BigObject as a d
 The Product.id, Customer.id and total_price are normalized to a float point data. and the qty column is set as a label for training.
 ```
 bosh>create table feature (f1 FLOAT, f2 FLOAT, f3 FLOAT , lab INT32)
-bosh>send 'select Product.id, Customer.id, total_price, qty from sales limit 100' to 'eval False str(float(a[0])/1000)+ "," + str(float(a[1]) / 1000) + "," + str(float(a[2])/10) + "," +a[3]' return to feature
+bosh>send 'select Product.price , total_price, Product.id , qty from sales limit 100' to 'eval False a[0] +","+str(float(a[1])/10) + "," + str(float(a[2])/1000)+","+ a[3]' return to feature
 
 ```
 The processed feature table :
 ```
 bosh>select * from feature limit 5
-2.557,3.226,5.224,8
-2.631,6.691,3.972,4
-1.833,6.691,0.69,1
-1.626,4.138,4.21,5
-0.375,4.138,6.726,6
+6.53,5.224,2.557,8
+9.93,3.972,2.631,4
+6.9,0.69,1.833,1
+8.42,4.21,1.626,5
+11.21,6.726,0.375,6
 ```
 
 2.set the first 90 rows as a trainning set
@@ -311,18 +311,19 @@ bosh>receive _print from 'DNNtrain 10'
 4.use the trained model to predict the last 10 rows to test the trained model. and then check the real label (qty)
 ```
 bosh>send 'select f1,f2,f3 from feature last 10' to 'DNNpredict 10'
-Predictions: [2 8 2 5 2 2 2 8 8 2]
-bosh>select lab from feature last 10
-2
-3
-1
-5
-2
-2
-4
-10
-10
-2
+Predictions: [2 2 1 5 2 2 5 8 8 2]
+bosh>select * from feature last 10
+14.93,2.986,3.54,2
+7.5,2.25,0.093,3
+14.73,1.473,0.315,1
+5.75,2.875,1.78,5
+5.75,1.15,0.518,2
+11.55,2.31,2.067,2
+6.6,2.64,1.88,4
+9.4,9.4,0.806,10
+7.67,7.67,0.043,10
+14.3,2.86,1.354,2
+
 ```
 
 
