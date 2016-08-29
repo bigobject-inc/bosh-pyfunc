@@ -281,7 +281,7 @@ The demo use tensorflow DNNclassifier to demonstrate how to use BigObject as a d
 
 1.create a feature table. Since the sample data is not a feature vector, we use the above-mentioned 'eval' function to normalize the data to similar a feature vector dataset. 
 
-The Product.id, Customer.id and total_price are normalized to a float point data. and the qty column is set as a label for training.
+The Product.price, total_price and Product.id are normalized to a float point data. and the qty column is set as a label for training.
 ```
 bosh>create table feature (f1 FLOAT, f2 FLOAT, f3 FLOAT , lab INT32)
 bosh>send 'select Product.price , total_price, Product.id , qty from sales limit 100' to 'eval False a[0] +","+str(float(a[1])/10) + "," + str(float(a[2])/1000)+","+ a[3]' return to feature
