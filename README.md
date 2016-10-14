@@ -6,6 +6,7 @@ The installation script will install python and some python library in your bigo
 ```
 docker run -td -p 9090:9090 -p 3306:3306 --name bo bigobject/bigobject:demo-1.61a
 git clone https://github.com/bigobject-inc/bosh-pyfunc.git
+cd bosh-pyfunc
 sh pysetup2bo.sh bo
 ```
 
