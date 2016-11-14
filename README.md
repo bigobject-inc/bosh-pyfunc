@@ -266,6 +266,7 @@ Please refer https://docs.python.org/2/library/math.html for the "math" module
 
 NOTE:
 Since the "eval" function does not check the input value, Please ensure the equation can be applied into all data rows and all function inputs are belong within an available range.
+
 For example, a negative number in a log() or sqrt() will cause the python program failed (return an empty table).
 
 
