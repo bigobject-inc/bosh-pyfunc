@@ -252,9 +252,9 @@ bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval Fals
 
 The basic python and the functions of the "math" module can be used to in eval
 
-ex. (square root of ( Product.id - qty ))  + 1
+ex. (square root of ( | Product.id - qty | ))  + 1
 ```
-bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval True math.sqrt( float(a[0]) - float(a[2])) + 1"
+bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval True math.sqrt( math.fabs(float(a[0]) - float(a[2]))) + 1"
 2557,8,52.24,51.0475773639
 2631,4,39.72,51.9046166865
 1833,1,6.9,43.7328913134
@@ -263,6 +263,10 @@ bosh>send "select Product.id, qty, total_price from sales limit 5" to "eval True
 ```
 
 Please refer https://docs.python.org/2/library/math.html for the "math" module
+
+NOTE:
+Since the "eval" function does not check the input value, Please ensure the equation can be applied into all data rows and all function inputs are belong within an available range.
+For example, a negative number in a log() or sqrt() will cause the python program failed (return an empty table).
 
 
 ==================================================================================
