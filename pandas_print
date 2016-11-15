@@ -3,20 +3,64 @@ import pandas
 import sys
 
 def runPandas(func_name , args):
-	df = pandas.read_csv(sys.stdin, header=None)
+	column=[]
+        column_argv=''
+	output_format=''
+
+        for argv in args:
+                if argv[:7] == "column=":
+                        column=argv[7:].split(',')
+                        column_argv=argv
+		if argv[:7] == "output=":
+			output_format=argv[7:]
+			
+#                elif argv[:6] == "index=":
+#                        index=argv[6:].split(',')
+#                        index_argv=argv
+
+#        if index_argv != '':
+#                args.remove(index_argv)
+        if column_argv != '':
+		args.remove(column_argv)
+#	print output_format
+	if output_format != '':
+		args.remove('output=' + output_format)
+
+	df = pandas.read_csv(sys.stdin)
 	col_name=[]
-	for i in range(1, int(df.shape[1]) + 1):
-		col_name.append('col' + str(i))
-	df.columns = col_name
+	if column_argv == '':
+		for i in range(1, int(df.shape[1]) + 1):
+			col_name.append('col' + str(i))
+		df.columns = col_name
+	else:
+		df.columns = column
+#		df.index = column
+	
 	m = getattr(df, func_name, None)
 	if callable(m):
 		arg = [float(i) for i in args]
         	res = m(*arg)
    	else:
 		res = "Unknown function name"
-        #print res.to_csv(sys.stdout, header=False, index=False)
-	print res
-	
+
+#	res.columns = column
+#	res.index = column
+#        print res.to_csv(sys.stdout, header=False, index=False )[:-1]
+	if output_format == 'csv':
+		#print res.to_csv(sys.stdout, header=False, index=False)
+		print res.to_csv(sys.stdout, header=False, index=False)[:-1]
+#		print column
+	elif output_format == 'csv-header':
+		print res.to_csv(sys.stdout, header=True, index=False)[:-1]
+	elif output_format == 'csv-sqaure':
+		print " ," + column_argv[7:]
+		print res.to_csv(sys.stdout, header=False, index=column)[:-1]
+	elif output_format == 'json':
+		out_str=res.to_json()
+		print out_str
+	else:
+		print res.to_string()
+			
 
 if __name__ == "__main__":
 	if len(sys.argv) > 1:
