@@ -52,7 +52,7 @@ def runPandas(func_name , args):
 #		print column
 	elif output_format == 'csv-header':
 		print res.to_csv(sys.stdout, header=True, index=False)[:-1]
-	elif output_format == 'csv-sqaure':
+	elif output_format == 'csv-square':
 		print " ," + column_argv[7:]
 		print res.to_csv(sys.stdout, header=False, index=column)[:-1]
 	elif output_format == 'json':
