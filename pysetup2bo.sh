@@ -6,7 +6,7 @@ if [ -z "$1" ]
 	exit
 fi
 
-echo '#!/bin/bash\nsudo apt-get update \nsudo apt-get install -y python python-numpy python-scipy python-pandas python-requests python-pkg-resources' > ./pysetup.sh
+echo -e '#!/bin/bash\nsudo apt-get update \nsudo apt-get install -y python python-numpy python-scipy python-pandas python-requests python-pkg-resources' > ./pysetup.sh
 
 bo_docker_name=$1
 docker cp ./pysetup.sh $bo_docker_name:/
