@@ -7,10 +7,11 @@ def run(print_source , eval_string):
 	while line:
 		a=line.strip().split(',')
 		res = eval(eval_string)
-		if print_source == 'False':
-			print str(res)
-		else:
-			print line.strip() + "," + str(res)
+		if res != None:
+			if print_source == 'False':
+				print str(res)
+			else:
+				print line.strip() + "," + str(res)
 
 		line = sys.stdin.readline()
 
