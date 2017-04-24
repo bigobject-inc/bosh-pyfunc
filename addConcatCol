@@ -13,7 +13,8 @@ def dumpfile(filename):
 	f = open(filename, 'w')
 	line = sys.stdin.readline()
 	while line:
-		f.write(line)
+		#f.write(line)
+		f.write('"' + '","'.join(line[:-1].split(',')) + '"\n')
 		line = sys.stdin.readline()
 	f.close()
 
