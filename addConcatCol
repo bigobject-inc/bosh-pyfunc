@@ -9,14 +9,20 @@ def add_a_concat_col(ind_1, ind_2):
 		print line[:-1] + "," + concat
 
 def dumpfile(filename):
-	print("dump file : " +filename)
-	f = open(filename, 'w')
-	line = sys.stdin.readline()
-	while line:
-		#f.write(line)
-		f.write('"' + '","'.join(line[:-1].split(',')) + '"\n')
+	try:
+		print("dump file : " +filename)
+		f = open(filename, 'w')
 		line = sys.stdin.readline()
-	f.close()
+		while line:
+			#f.write(line)
+			f.write('"' + '","'.join(line[:-1].split(',')) + '"\n')
+			line = sys.stdin.readline()
+		f.close()
+	except:
+		print ("Unexpected error:", sys.exc_info()[0])
+	else:
+		print ("file dumped")
+
 
 if __name__ == "__main__":
 	if len(sys.argv) > 2:
