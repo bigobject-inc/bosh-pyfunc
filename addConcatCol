@@ -8,6 +8,14 @@ def add_a_concat_col(ind_1, ind_2):
 			concat = concat[:-1]
 		print line[:-1] + "," + concat
 
+def dumpfile(filename):
+	print("dump file : " +filename)
+	f = open(filename, 'w')
+	line = sys.stdin.readline()
+	while line:
+		f.write(line)
+		line = sys.stdin.readline()
+	f.close()
 
 if __name__ == "__main__":
 	if len(sys.argv) > 2:
@@ -15,5 +23,8 @@ if __name__ == "__main__":
 		ccol2 = sys.argv[2]
 		
 		add_a_concat_col(int(ccol1) , int(ccol2))
+	elif len(sys.argv) == 2:
+		dumpfile(sys.argv[1])
+
 	else:
 		print "addConcatCol <col 1> <col 2>"
